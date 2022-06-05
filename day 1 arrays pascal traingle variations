@@ -1,0 +1,52 @@
+// print each row and each col of pascal triangle
+
+link - https://leetcode.com/problems/pascals-triangle/
+ 
+// code 
+ 
+ #include <bits/stdc++.h> 
+vector<vector<long long int>> printPascal(int n) 
+{
+  // Write your code here.
+            vector<vector<long long int>> r(n);
+        for(int i=0;i<n;i++){
+            r[i].resize(i+1);
+            r[i][0]=r[i][i]=1;
+            for(int j=1;j<i;j++)
+                r[i][j]=r[i-1][j-1]+r[i-1][j];
+                
+        }        
+        
+        return r;
+        
+}
+
+time - o(n2)
+space - o(n2)
+
+
+// print nth row of any given value
+
+link -https://leetcode.com/problems/pascals-triangle-ii/
+
+// code
+
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        
+         vector<int> v;
+        long long int val=1;
+        for(int i=0; i<=rowIndex; i++){
+            v.push_back(val);
+            val = val*(rowIndex-i);
+            val=val/(i+1);
+        }
+        return v;
+    }
+};
+
+time - o(n)
+space -O(1)
+
+

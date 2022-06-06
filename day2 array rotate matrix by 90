@@ -1,0 +1,56 @@
+rotate matrix by 90 
+ link -- https://leetcode.com/problems/rotate-image/
+ code
+ 
+ class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++)
+                swap(matrix[i][j],matrix[j][i]);
+        }
+        for(int i=0;i<n;i++)
+            reverse(matrix[i].begin(),matrix[i].end());
+    }
+};
+
+time - o(n*m) + o(n*m)
+space - o(1)
+
+                                     -----------**********---------
+
+
+
+little variations
+link --https://www.codingninjas.com/codestudio/problems/981260?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=3
+
+#include <bits/stdc++.h> 
+
+void rotateMatrix(vector<vector<int>> &mat, int n, int m)
+{
+    // Write your code here
+      int iu =0,id=n-1,jl=0,jr=m-1;
+    if(id==0 or jr ==0)return ;
+    while(jl<jr and iu<id) {
+        int temp = mat[iu][iu];
+        for(int j = jl+1;j<=jr;j++){
+            swap(temp,mat[iu][j]); 
+        }
+        for(int i=iu+1;i<=id;i++){
+            swap(temp,mat[i][jr]);
+        }
+        for(int j= jr-1;j>=jl;j--){
+            swap(temp,mat[id][j]);
+        }
+        for(int i = id-1;i>=iu;i--){
+            swap(temp,mat[i][jl]);
+        }
+
+        iu++;id--;
+        jl++;jr--;
+
+    }    
+    
+}
+time and space as of last solu

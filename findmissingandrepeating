@@ -1,0 +1,62 @@
+problem -  find missing and repeating 
+link --   https://www.codingninjas.com/codestudio/problems/873366?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=1
+code -- using count array 
+
+#include <bits/stdc++.h> 
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	// Write your code here 
+    pair<int,int> ans;
+  int count[n+1]={0};
+    for(int i=0;i<n;i++){
+       count[arr[i]]++;
+    }
+    for(int i=1;i<=n;i++ ){
+        if(count[i]==0 )
+            ans.first=i;
+         if(count[i]>1)
+             ans.second=i;
+     }
+    return ans;
+}
+
+
+Time Complexity: O(N) + O(N) (as we are traversing 2 times )
+
+Space Complexity: O(N) As we are making new ans pair
+
+
+_____________________******************************_____________________________
+
+
+method 2 -    using maths --
+
+
+
+code--
+ #include <bits/stdc++.h> 
+
+vector<int> missingAndRepeating(vector<int> &arr, int n)
+{
+	// Write your code here 
+     int s=(n*(n+1))/2;
+     int p=(n*(n+1)*(n+2))/6;
+    for(int i=0;i<n;i++){
+        s = s- (long long int)arr[i];
+        p = p - (long long int)arr[i]*(long long int)arr[i];
+        
+    }
+    
+	int missing= (s+(p/s))/2;
+    int repeat= missing-s;
+    vector <int> ans;
+
+    ans.push_back(repeat);
+    ans.push_back(missing);
+
+    return ans;
+}
+Time Complexity: O(N) 
+
+Space Complexity: O(1) 

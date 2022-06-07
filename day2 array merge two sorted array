@@ -1,0 +1,90 @@
+problem - merge two sorted array
+link -https://leetcode.com/problems/merge-sorted-array/
+code- 
+
+#include <bits/stdc++.h> 
+vector<int> ninjaAndSortedArrays(vector<int>& arr1, vector<int>& arr2, int m, int n) {
+	// Write your code here.
+    int i=m+n-1;
+    int p1=m-1;
+    int p2=n-1;
+    while(p2>=0){
+        
+        if(p1>=0 && arr1[p1]>arr2[p2])
+            arr1[i--]=arr1[p1--];
+        else
+            arr1[i--]=arr2[p2--];
+    }
+    return arr1;
+}
+
+time - o(m)
+space o(1)
+__________________________________________________*******************************************_________________________________________________________
+
+/// gap method
+
+#include<bits/stdc++.h>
+using namespace std;
+void merge(int ar1[], int ar2[], int n, int m) {
+  // code here 
+  int gap = ceil((float)(n + m) / 2);
+  while (gap > 0) {
+    int i = 0;
+    int j = gap;
+    while (j < (n + m)) {
+      if (j < n && ar1[i] > ar1[j]) {
+        swap(ar1[i], ar1[j]);
+      } else if (j >= n && i < n && ar1[i] > ar2[j - n]) {
+        swap(ar1[i], ar2[j - n]);
+      } else if (j >= n && i >= n && ar2[i - n] > ar2[j - n]) {
+        swap(ar2[i - n], ar2[j - n]);
+      }
+      j++;
+      i++;
+    }
+    if (gap == 1) {
+      gap = 0;
+    } else {
+      gap = ceil((float) gap / 2);
+    }
+  }
+}
+
+Time complexity: O(logn)
+
+Space Complexity: O(1)
+
+__________________________________________******************************************************_________________________________________
+
+code - using insertion sorting 
+
+void merge(int arr1[], int arr2[], int n, int m) {
+
+  int i, k;
+  for (i = 0; i < n; i++) {
+    // take first element from arr1 
+    // compare it with first element of second array
+    // if condition match, then swap
+    if (arr1[i] > arr2[0]) {
+      int temp = arr1[i];
+      arr1[i] = arr2[0];
+      arr2[0] = temp;
+    }
+
+    // then sort the second array
+    // put the element in its correct position
+    // so that next cycle can swap elements correctly
+    int first = arr2[0];
+    // insertion sort is used here
+    for (k = 1; k < m && arr2[k] < first; k++) {
+      arr2[k - 1] = arr2[k];
+    }
+    arr2[k - 1] = first;
+  }
+}
+
+Time complexity: O(n*m)
+
+Space Complexity: O(1) 
+

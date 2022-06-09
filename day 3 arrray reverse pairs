@@ -1,0 +1,28 @@
+problem -- reverse pairs
+link -- https://leetcode.com/problems/reverse-pairs/
+
+code -- 
+ class Solution {
+public:
+    int reversePairs(vector<int>& nums) {
+        int n=nums.size();
+        int count=0;
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++)
+            {
+                if(nums[i]>2*nums[j]) count++;
+            }
+        }
+        return count;
+    }
+};
+
+Time Complexity: O (N^2) ( Nested Loops )
+
+Space Complexity:  O(1)
+
+
+
+Solution 2: Optimal Solution
+
+

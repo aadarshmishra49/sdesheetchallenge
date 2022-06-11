@@ -1,0 +1,75 @@
+link -https://leetcode.com/problems/two-sum/
+
+code - class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        vector<int> v1, v2;
+        v1 = nums;
+        sort(nums.begin(), nums.end());
+        int l = 0, m = n-1;
+        while(l!=m)
+        {
+            int sum = nums[l] + nums[m];
+            if(sum==target)
+            break;
+            else if(sum>target)
+            m--;
+            else
+            l++;
+        }
+        for(int i=0;i<v1.size();++i)
+        {
+            if(v1[i]==nums[l])
+                v2.push_back(i);
+            else if(v1[i]==nums[m])
+                v2.push_back(i);
+        }
+        return v2;
+    
+    }
+};
+
+Time Complexity: O(NlogN)
+
+Space Complexity: O(N)
+
+
+
+2nd way ----
+
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> v;
+        unordered_map<int,int> m;
+        int ans=0;
+        for(int i=0;i<nums.size();i++){
+            int b=target-nums[i];
+          if (m.find(b) != m.end()){
+                 v.push_back(m[b]);
+                    v.push_back(i);
+              break;
+          }
+            m[nums[i]]=i;
+            
+            
+        }
+        return v;
+    }
+};
+
+Time Complexity: O(N)
+
+Space Complexity: O(N)
+
+
+
+
+
+
+
+
+
+

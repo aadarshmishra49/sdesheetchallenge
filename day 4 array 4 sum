@@ -1,0 +1,108 @@
+problem - 4 sum
+link - https://leetcode.com/problems/4sum/
+
+code -
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        
+        
+       vector<vector<int>> res;
+        if (nums.empty())
+            return res;                        
+        sort(nums.begin(), nums.end());   
+        for (int i = 0; i < nums.size(); i++)
+        { 
+            for (int j = i + 1; j < nums.size(); j++)
+            {
+                int target_sum = target - nums[i] - nums[j];   
+                int left = j + 1;
+                int right = nums.size() - 1;
+
+                while (left < right)
+                {
+                    int two_sum = nums[left] + nums[right];
+                    if (two_sum > target_sum)
+                        right--;
+                    else if (two_sum < target_sum)
+                        left++;
+                    else
+                    {
+                        vector<int> quad(4, 0);
+                        quad[0] = nums[i];
+                        quad[1] = nums[j];
+                        quad[2] = nums[left];
+                        quad[3] = nums[right];
+                        res.push_back(quad);  
+
+                       //jumping duplicates
+                        while (left < right && nums[left] == quad[2])
+                            ++left;
+                        while (left < right && nums[right] == quad[3])
+                            --right;
+                    }
+                }
+                while (j < nums.size() - 1 && nums[j] == nums[j + 1])
+                    ++j;
+            }
+            while (i < nums.size() - 1 && nums[i + 1] == nums[i])
+                ++i;
+        }
+        return res;
+    }
+        
+        
+        
+    
+};
+
+time - o(n3)
+space - o(1)
+
+
+solution -- not optimized brute force
+
+
+
+code --
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>v;
+        set<vector<int>>s;
+        for(int i = 0 ; i< nums.size();i++){
+            for(int j = i+1 ; j< nums.size();j++){
+                int start = j+1;
+                int end = nums.size()-1;
+                while(start<end){
+                    long long  sum = nums[i]+ nums[j]+ 1LL + nums[start]+ nums[end] -1LL;
+                    if(sum==target){
+                        vector<int>temp={nums[i],nums[j],nums[start],nums[end]};
+                        if(s.find(temp)==s.end()){
+                            v.push_back(temp);
+                            s.insert(temp);
+                        }
+                        temp.clear();
+                        start++;
+                        end--;
+                    }
+                    else if(sum>target){
+                        end--;
+                    }
+                    else{
+                        start++;
+                    }
+                    
+                }
+            }
+        }
+        return v;
+    }
+};
+
+Time Complexity: O(N log N + N³ logN)
+Reason: Sorting the array takes N log N and three nested loops will be taking N³ and for binary search, it takes another log N.
+Space Complexity: O(M * 4), where M is the number of quads

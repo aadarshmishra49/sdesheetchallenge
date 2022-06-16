@@ -1,0 +1,35 @@
+problem -Swapping Nodes in a Linked List
+link -- https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
+
+code - 
+class Solution {
+public:
+    ListNode* swapNodes(ListNode* head, int k) {
+     
+       ListNode* left = head;
+        ListNode* right = head;
+        ListNode* curr = head;
+        
+        int counter = 1;
+        while(curr!=NULL){
+            if (counter<k){
+                left = left->next;
+            }
+            if (counter>k){
+                right = right->next;
+            }
+            curr = curr->next;
+            counter++;
+        }
+        
+        int temp = left->val;
+        left->val = right->val;
+        right->val = temp;
+        
+        return head;
+  
+    }
+};
+
+time -o(n)  
+space - o(1)

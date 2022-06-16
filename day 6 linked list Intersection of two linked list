@@ -1,0 +1,85 @@
+problem - intersection of two linked list
+link - https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+brute approach  --
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *temp1=headA;
+        ListNode *temp2=headB;
+        if(headA==NULL || headB==NULL) return NULL;
+        while(temp1!=NULL){
+            while(temp2!=NULL){
+              if(temp1==temp2)
+                   return temp1;
+                
+                temp2=temp2->next;
+            
+            }
+            temp2=headB;
+            temp1=temp1->next;
+            
+            
+            
+        }
+        return NULL;
+        
+    }
+};
+
+time - o(N*M)
+space - O(1)
+
+
+approach 2 - optimized solution
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(headA == NULL || headB == NULL)
+            return NULL; 
+        ListNode *ptr1 = headA, *ptr2 = headB; 
+        // Finding Length of list A
+        int lengthA = 0; 
+        while(ptr1 != NULL){
+            lengthA++; 
+            ptr1 = ptr1->next; 
+        }
+        
+        // Finding length of list B
+        int lengthB = 0; 
+        while(ptr2 != NULL){
+            lengthB++; 
+            ptr2 = ptr2->next; 
+        }
+        
+        int diff = abs(lengthA - lengthB); 
+        ptr1 = headA, ptr2 = headB; 
+        // Movind |L1-L2| forward in the longer list
+        if(lengthA > lengthB){
+            while(diff--)
+                ptr1 = ptr1->next;
+        }
+        else{
+            while(diff--)
+                ptr2 = ptr2->next;
+        }
+		// Moving in the lists simultaneously 
+        while(ptr1 != ptr2){
+            ptr1 = ptr1->next; 
+            ptr2 = ptr2->next; 
+            if(ptr1 == NULL || ptr2 == NULL)
+                return NULL; 
+        }
+        return ptr1; 
+    }
+};
+
+Step 1-> Find the length of both linkedlists and take their difference 'd'
+Step 2-> Move the larger node forward by 'd' steps
+Step 3-> Now the starting point of both linkedlists are equidistant from intersection ,so move both pointers together untill the intersection is found.
+TC->O(m+n) , SC->O(1)
+
+
+

@@ -1,0 +1,27 @@
+problem - starting point of loop
+link -- https://leetcode.com/problems/linked-list-cycle-ii/
+
+code --
+
+ ListNode *detectCycle(ListNode *head) {
+        ListNode *slow = head, *fast = head;
+		int loopExist = 0;
+		while(fast && fast -> next) {
+			slow = slow -> next;
+			fast = fast -> next -> next;
+			if(slow == fast) {
+				loopExist = 1;
+				break;
+			}
+		}
+		if(!loopExist)
+			return NULL;
+		slow = head;
+		while(slow != fast) {
+			slow = slow -> next;
+			fast = fast -> next;
+		}
+		return slow;
+
+    }
+};

@@ -1,0 +1,20 @@
+problem - Delete Node in a Linked List
+link --https://leetcode.com/problems/delete-node-in-a-linked-list/
+code --
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+  ListNode* preNode = nullptr;
+    
+    while(node -> next != NULL)
+    {
+        swap(node->val, node->next->val);
+        preNode = node;
+        node = node -> next;
+    }
+    delete(preNode->next);
+    preNode -> next = NULL;
+    
+        
+    }
+};

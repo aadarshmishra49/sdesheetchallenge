@@ -81,5 +81,28 @@ Step 2-> Move the larger node forward by 'd' steps
 Step 3-> Now the starting point of both linkedlists are equidistant from intersection ,so move both pointers together untill the intersection is found.
 TC->O(m+n) , SC->O(1)
 
+code -- 3
+
+int findIntersection(Node *firstHead, Node *secondHead)
+{
+    //Write your code here
+        Node *first=firstHead;
+    Node *second=secondHead;
+    while(first!=second){
+        if(first==NULL)
+            first=secondHead;
+        else
+            first=first->next;
+        if(second==NULL)
+            second=firstHead;
+        else
+            second=second->next;
+    }if(first==NULL)
+        return -1;
+    else
+        return first->data;
+
+}
+
 
 

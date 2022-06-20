@@ -1,0 +1,31 @@
+problem -- Reverse First K elements of Queue 
+link -- https://practice.geeksforgeeks.org/problems/reverse-first-k-elements-of-queue/1/#
+
+code --
+
+Function to reverse first k elements of a queue.
+queue<int> modifyQueue(queue<int> q, int k) {
+    // add code here.
+      stack<int> s;
+    for(int i=0;i<k;i++){
+        int val=q.front();
+        s.push(val);
+        q.pop();
+    }
+    while(!s.empty()){
+        q.push(s.top());
+        s.pop();
+    }
+    int t=q.size()-k;
+    while(t--){
+        int val=q.front();
+        q.pop();
+        q.push(val);
+        
+        
+    }
+    return q;
+
+
+}
+

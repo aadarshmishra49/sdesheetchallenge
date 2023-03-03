@@ -1,2 +1,2 @@
-# sdesheetchallenge
-solving striver's  sde sheet
+# sde-sheet
+solving dsa problems from sheet
